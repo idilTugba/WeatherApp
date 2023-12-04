@@ -1,0 +1,61 @@
+type Clouds {
+  all: Int
+}
+
+type Coord {
+  lat: Float
+  lon: Float
+}
+
+type Main {
+  feels_like: Float
+  grnd_level: Int
+  humidity: Int
+  pressure: Int
+  sea_level: Int
+  temp: Float
+  temp_max: Float
+  temp_min: Float
+}
+
+type Root {
+  base: String
+  clouds: Clouds
+  cod: Int
+  coord: Coord
+  dt: Int
+  id: Int
+  main: Main
+  name: String
+  sys: Sys
+  timezone: Int
+  visibility: Int
+  weather: [WeatherEntry]
+  wind: Wind
+}
+
+type Sys {
+  country: String
+  id: Int
+  sunrise: Int
+  sunset: Int
+  type: Int
+}
+
+type WeatherEntry {
+  description: String
+  icon: String
+  id: Int
+  main: String
+}
+
+type Wind {
+  deg: Int
+  gust: Float
+  speed: Float
+}
+
+type Query {
+  myQuery(appid: String, lat: String, lon: String): Root
+    @rest(endpoint: "https://api.openweathermap.org/data/2.5/weather")
+}

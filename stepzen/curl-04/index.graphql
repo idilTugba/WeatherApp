@@ -1,0 +1,152 @@
+type Astro {
+  is_moon_up: Int
+  is_sun_up: Int
+  moon_illumination: Int
+  moon_phase: String
+  moonrise: String
+  moonset: String
+  sunrise: String
+  sunset: String
+}
+
+type Condition {
+  code: Int
+  icon: String
+  text: String
+}
+
+type Condition1 {
+  code: Int
+  icon: String
+  text: String
+}
+
+type Condition2 {
+  code: Int
+  icon: String
+  text: String
+}
+
+type Current {
+  cloud: Int
+  condition: Condition
+  feelslike_c: Int
+  feelslike_f: Int
+  gust_kph: Float
+  gust_mph: Float
+  humidity: Int
+  is_day: Int
+  last_updated: String
+  last_updated_epoch: Int
+  precip_in: Float
+  precip_mm: Float
+  pressure_in: Float
+  pressure_mb: Int
+  temp_c: Int
+  temp_f: Float
+  uv: Int
+  vis_km: Int
+  vis_miles: Int
+  wind_degree: Int
+  wind_dir: String
+  wind_kph: Float
+  wind_mph: Float
+}
+
+type Day {
+  avghumidity: Int
+  avgtemp_c: Float
+  avgtemp_f: Float
+  avgvis_km: Float
+  avgvis_miles: Int
+  condition: Condition1
+  daily_chance_of_rain: Int
+  daily_chance_of_snow: Int
+  daily_will_it_rain: Int
+  daily_will_it_snow: Int
+  maxtemp_c: Float
+  maxtemp_f: Float
+  maxwind_kph: Float
+  maxwind_mph: Float
+  mintemp_c: Float
+  mintemp_f: Float
+  totalprecip_in: Float
+  totalprecip_mm: Float
+  totalsnow_cm: Float
+  uv: Int
+}
+
+type Forecast {
+  forecastday: [ForecastdayEntry]
+}
+
+type ForecastdayEntry {
+  astro: Astro
+  date: Date
+  date_epoch: Int
+  day: Day
+  hour: [HourEntry]
+}
+
+type HourEntry {
+  chance_of_rain: Int
+  chance_of_snow: Int
+  cloud: Int
+  condition: Condition2
+  dewpoint_c: Float
+  dewpoint_f: Float
+  feelslike_c: Float
+  feelslike_f: Float
+  gust_kph: Float
+  gust_mph: Float
+  heatindex_c: Float
+  heatindex_f: Float
+  humidity: Int
+  is_day: Int
+  precip_in: Float
+  precip_mm: Float
+  pressure_in: Float
+  pressure_mb: Int
+  temp_c: Float
+  temp_f: Float
+  time: String
+  time_epoch: Int
+  uv: Int
+  vis_km: Int
+  vis_miles: Int
+  will_it_rain: Int
+  will_it_snow: Int
+  wind_degree: Int
+  wind_dir: String
+  wind_kph: Float
+  wind_mph: Float
+  windchill_c: Float
+  windchill_f: Float
+}
+
+type Location {
+  country: String
+  lat: Float
+  localtime: String
+  localtime_epoch: Int
+  lon: Float
+  name: String
+  region: String
+  tz_id: String
+}
+
+type Root {
+  current: Current
+  forecast: Forecast
+  location: Location
+}
+
+type Query {
+  myQuery(
+    alerts: String
+    aqi: String
+    days: String
+    key: String
+    q: String
+  ): Root @rest(endpoint: "http://api.weatherapi.com/v1/forecast.json")
+}

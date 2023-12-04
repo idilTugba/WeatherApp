@@ -1,0 +1,92 @@
+type Current {
+  interval: Int
+  rain: Int
+  temperature_2m: Float
+  time: DateTime
+  weather_code: Int
+  wind_speed_10m: Float
+}
+
+type CurrentUnits {
+  interval: String
+  rain: String
+  temperature_2m: String
+  time: String
+  weather_code: String
+  wind_speed_10m: String
+}
+
+type Daily {
+  sunrise: [DateTime]
+  sunset: [DateTime]
+  temperature_2m_max: [Float]
+  temperature_2m_min: [Float]
+  time: [Date]
+  uv_index_max: [Float]
+  weather_code: [Int]
+  wind_speed_10m_max: [Float]
+}
+
+type DailyUnits {
+  sunrise: String
+  sunset: String
+  temperature_2m_max: String
+  temperature_2m_min: String
+  time: String
+  uv_index_max: String
+  weather_code: String
+  wind_speed_10m_max: String
+}
+
+type Hourly {
+  apparent_temperature: [Float]
+  dew_point_2m: [Float]
+  precipitation_probability: [Int]
+  rain: [Float]
+  relative_humidity_2m: [Int]
+  temperature_2m: [Float]
+  time: [DateTime]
+  uv_index: [Float]
+  weather_code: [Int]
+  wind_speed_10m: [Float]
+}
+
+type HourlyUnits {
+  apparent_temperature: String
+  dew_point_2m: String
+  precipitation_probability: String
+  rain: String
+  relative_humidity_2m: String
+  temperature_2m: String
+  time: String
+  uv_index: String
+  weather_code: String
+  wind_speed_10m: String
+}
+
+type Root {
+  current: Current
+  current_units: CurrentUnits
+  daily: Daily
+  daily_units: DailyUnits
+  elevation: Int
+  generationtime_ms: Float
+  hourly: Hourly
+  hourly_units: HourlyUnits
+  latitude: Int
+  longitude: Float
+  timezone: String
+  timezone_abbreviation: String
+  utc_offset_seconds: Int
+}
+
+type Query {
+  myQuery(
+    current: String
+    daily: String
+    hourly: String
+    latitude: String
+    longitude: String
+    timezone: String
+  ): Root @rest(endpoint: "https://api.open-meteo.com/v1/forecast")
+}
